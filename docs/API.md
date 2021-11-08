@@ -60,6 +60,22 @@ curl --location --request GET 'http://localhost:3000/api/loan/659b8749-5100-43ad
 
 ---
 
+### Get all loans
+
+Get all loans' information in database
+
+```
+GET /api/loan
+```
+
+#### Example request
+
+```
+curl --location --request GET 'http://localhost:3000/api/loan'
+```
+
+---
+
 ### Approve/Reject a loan
 
 Update the loan status to approved/rejected
