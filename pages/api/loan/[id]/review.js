@@ -1,29 +1,47 @@
+import Joi from "joi";
+import { db } from "../../../utils/database";
 import {
-	createMethodProtectMiddleware,
 	createCorsMiddleware,
+	createMethodProtectMiddleware,
 	withMiddlewares,
 } from "../../../utils/middleware";
-import isUUID from "validator/lib/isUUID";
 
 async function handler(req, res) {
-	const id = req.query.id;
-	const status = req.body.status;
+	try {
+		const body = { ...req.query, ...req.body };
+		const { status, id } = await handler.schema.validateAsync(body);
 
-	if (typeof id === undefined || !isUUID(id, 4)) {
-		return res.status(400).json({ error: "loanId is invalid" });
+		// Validate loan application existence
+		const { data, error } = await db.from("loans").select().eq("id", id);
+		if (error)
+			return res.status(500).json({ error: "internal server error" });
+		if (data.length === 0)
+			return res.status(404).json({ error: "loan is not exist" });
+
+		// Only update pending loan applications
+		const [loan] = data;
+		if (loan.status !== "pending")
+			return res.status(400).json({ error: "loan was reviewed" });
+
+		// Update loan application status
+		const { error: hasError } = await db
+			.from("loans")
+			.update({ status })
+			.match({ id });
+		if (hasError)
+			return res.status(500).json({ error: "internal server error" });
+
+		return res.status(200).json({ success: true });
+	} catch (err) {
+		return res.status(400).json({ error: err.message });
 	}
-
-	if (
-		typeof status === undefined ||
-		!["approved", "rejected"].includes(status)
-	) {
-		return res.status(400).json({ error: "status is invalid" });
-	}
-
-	return res.status(200).json({ success: true });
 }
 
 handler.allowedMethods = ["POST"];
+handler.schema = Joi.object({
+	id: Joi.string().uuid({ version: "uuidv4" }).required(),
+	status: Joi.string().valid("approved", "rejected"),
+});
 
 export default withMiddlewares(
 	createCorsMiddleware(handler.allowedMethods),

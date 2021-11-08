@@ -1,62 +1,57 @@
+import Joi from "joi";
+import { db } from "../../utils/database";
 import {
-	createMethodProtectMiddleware,
 	createCorsMiddleware,
+	createMethodProtectMiddleware,
 	withMiddlewares,
 } from "../../utils/middleware";
+import {
+	camelCaseObjectKeys,
+	snakeCaseObjectKeys,
+} from "../../utils/transform";
 
-async function handler(req, res) {
-	if (req.method === "GET") {
+const getAllLoansHandler = async (_, res) => {
+	const { data, error } = await db.from("loans").select();
+	if (error) return res.status(500).json({ error: "internal server error" });
+	return res
+		.status(200)
+		.json({ success: true, data: data.map(camelCaseObjectKeys) });
+};
+
+const createLoanHandler = async (req, res) => {
+	try {
+		const body = await createLoanHandler.schema.validateAsync(req.body);
+		const {
+			data: { id },
+			error,
+		} = await db.from("loans").insert(snakeCaseObjectKeys(body));
+		if (error)
+			return res.status(500).json({ error: "internal server error" });
+		// TODO: Call Seth smart contract to insert loan data hash
 		return res.status(200).json({
 			success: true,
-			data: [
-				{
-					id: "209cd60c-1814-4059-990d-7d01bc7d9950",
-					status: null,
-					name: "Nguyễn Minh Cường",
-					nationalId: "224198812",
-					phoneNumber: "+84905131002",
-					gender: 1,
-					amount: 45000000,
-					interestRate: 7.06,
-					duration: 6,
-					disbursedAt: new Date(2021, 10, 12),
-					createdAt: new Date(2021, 10, 8),
-				},
-				{
-					id: "9f0883b6-862b-4cff-9b6f-91889a84b890",
-					status: "approved",
-					name: "Nguyễn Thị Ngọc Trinh",
-					nationalId: "225925482",
-					phoneNumber: "+84905761112",
-					gender: 0,
-					amount: 10000000,
-					interestRate: 7.06,
-					duration: 12,
-					disbursedAt: new Date(2021, 10, 12),
-					createdAt: new Date(2021, 10, 8),
-				},
-				{
-					id: "378dad5c-5183-4ec8-ae66-599b2696c2a5",
-					status: "rejected",
-					name: "Trần Minh An",
-					nationalId: "225981231",
-					phoneNumber: "+84907121331",
-					gender: 0,
-					amount: 12000000,
-					interestRate: 7.06,
-					duration: 24,
-					disbursedAt: new Date(2021, 10, 12),
-					createdAt: new Date(2021, 10, 8),
-				},
-			],
+			message: "Created loan successfully",
+			id,
 		});
+	} catch (err) {
+		return res.status(400).json({ error: err.message });
 	}
+};
 
-	return res.status(200).json({
-		success: true,
-		message: "Created loan successfully",
-		loanId: "7c616c2f-f1b2-4171-8701-9cf88531bb9e",
-	});
+createLoanHandler.schema = Joi.object({
+	name: Joi.string().min(3).max(100).required(),
+	nationalId: Joi.string().min(9).required(),
+	phoneNumber: Joi.string().length(12).pattern(/^\+84/).required(),
+	gender: Joi.number().min(0).max(1).required(),
+	amount: Joi.number().min(1000000).max(100000000).required(),
+	interestRate: Joi.number().min(0).required(),
+	duration: Joi.number().min(1).max(36).required(),
+});
+
+async function handler(req, res) {
+	return req.method === "GET"
+		? getAllLoansHandler(req, res)
+		: createLoanHandler(req, res);
 }
 
 handler.allowedMethods = ["GET", "POST"];
