@@ -1,10 +1,10 @@
 import Joi from "joi";
-import { db } from "../../../utils/database";
+import { db } from "../../../../utils/database";
 import {
 	createCorsMiddleware,
 	createMethodProtectMiddleware,
 	withMiddlewares,
-} from "../../../utils/middleware";
+} from "../../../../utils/middleware";
 
 async function handler(req, res) {
 	try {

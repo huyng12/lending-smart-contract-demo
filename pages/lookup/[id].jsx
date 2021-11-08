@@ -1,4 +1,4 @@
-import { getLoan } from "../../api";
+import { getLoanById } from "../../apis";
 import { Page } from "../../components/page";
 
 const LoanInformationBody = (props) => (
@@ -19,7 +19,7 @@ const LoanInformationPage = (props) => (
 export const getServerSideProps = async (context) => {
 	const { id } = context.query;
 	try {
-		const { data } = await getLoan(id);
+		const { data } = await getLoanById(id);
 		return { props: { loan: data } };
 	} catch (err) {
 		return {

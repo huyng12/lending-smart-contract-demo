@@ -1,8 +1,8 @@
 import {
-	withMiddlewares,
-	createMethodProtectMiddleware,
 	createCorsMiddleware,
-} from "../utils/middleware";
+	createMethodProtectMiddleware,
+	withMiddlewares,
+} from "../../utils/middleware";
 
 async function handler(_, res) {
 	return res.status(200).json({

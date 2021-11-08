@@ -1,4 +1,4 @@
-import { getAllLoans } from "../../api";
+import { getAllLoans } from "../../apis";
 import { Page } from "../../components/page";
 
 const AdminBody = (props) => (

@@ -1,14 +1,14 @@
 import Joi from "joi";
-import { db } from "../../utils/database";
+import { db } from "../../../utils/database";
 import {
 	createCorsMiddleware,
 	createMethodProtectMiddleware,
 	withMiddlewares,
-} from "../../utils/middleware";
+} from "../../../utils/middleware";
 import {
 	camelCaseObjectKeys,
 	snakeCaseObjectKeys,
-} from "../../utils/transform";
+} from "../../../utils/transform";
 
 const getAllLoansHandler = async (_, res) => {
 	const { data, error } = await db.from("loans").select();

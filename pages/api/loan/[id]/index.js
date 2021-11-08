@@ -1,11 +1,11 @@
 import Joi from "joi";
-import { db } from "../../../utils/database";
+import { db } from "../../../../utils/database";
 import {
 	createCorsMiddleware,
 	createMethodProtectMiddleware,
 	withMiddlewares,
-} from "../../../utils/middleware";
-import { camelCaseObjectKeys } from "../../../utils/transform";
+} from "../../../../utils/middleware";
+import { camelCaseObjectKeys } from "../../../../utils/transform";
 
 async function handler(req, res) {
 	try {
