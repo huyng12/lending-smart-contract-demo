@@ -14,7 +14,7 @@ POST /api/loan
 | ------------ | ------ | ------------------ |
 | name         | string |                    |
 | nationalId   | string |                    |
-| phoneNumber  | string | +849**\_\_\_\_**   |
+| phoneNumber  | string | +849xxxxxxxx       |
 | gender       | number | 0: female, 1: male |
 | amount       | number | 10000000           |
 | interestRate | number | 7.06               |
