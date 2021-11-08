@@ -16,12 +16,16 @@ async function handler(req, res) {
 		if (error)
 			return res.status(500).json({ error: "internal server error" });
 		if (data.length === 0)
-			return res.status(404).json({ error: "loan is not exist" });
+			return res
+				.status(404)
+				.json({ error: "loan application is not exist" });
 
 		// Only update pending loan applications
 		const [loan] = data;
 		if (loan.status !== "pending")
-			return res.status(400).json({ error: "loan was reviewed" });
+			return res
+				.status(400)
+				.json({ error: "loan application was reviewed" });
 
 		// Update loan application status
 		const { error: hasError } = await db
