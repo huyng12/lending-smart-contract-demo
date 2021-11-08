@@ -1,14 +1,14 @@
 import {
-	createMethodProtectMiddleware,
 	createCorsMiddleware,
+	createMethodProtectMiddleware,
 	withMiddlewares,
 } from "../../../utils/middleware";
-import isUUID from "validator/lib/isUUID";
+import { isValidLoanId } from "../../../utils/validator";
 
 async function handler(req, res) {
 	const id = req.query.id;
 
-	if (typeof id === undefined || !isUUID(id, 4)) {
+	if (!isValidLoanId(id)) {
 		res.status(400).json({ error: "loanId is invalid" });
 	}
 
