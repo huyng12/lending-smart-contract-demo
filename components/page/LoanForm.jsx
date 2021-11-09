@@ -1,10 +1,25 @@
 import { Button, Form, Input, Select } from "antd";
+import axios from "axios";
 import React from "react";
 
 const { Option } = Select;
-const LoanForm = () => {
-	const onFinish = (values) => {
-		console.log("Success:", values);
+const LoanForm = (props) => {
+	const onFinish = (loanData) => {
+		console.log("Success:", loanData);
+		// call API
+		const userGender = loanData.gender === "female" ? 0 : 1;
+		const dataToSave = {
+			...loanData,
+			gender: userGender,
+		};
+		axios
+			.post("https://lending-sc-demo.nguyenrk.com/api/loan", dataToSave)
+			.then((response) => {
+				console.log(response);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 	};
 
 	const onFinishFailed = (errorInfo) => {
@@ -99,7 +114,7 @@ const LoanForm = () => {
 					},
 				]}
 			>
-				<Input type="number"/>
+				<Input type="number" />
 			</Form.Item>
 			<Form.Item
 				label="Duration"
@@ -128,4 +143,3 @@ const LoanForm = () => {
 };
 
 export default LoanForm;
-
