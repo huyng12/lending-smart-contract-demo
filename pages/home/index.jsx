@@ -1,5 +1,4 @@
 import { Page } from "../../components/page";
-
 const HomeBody = () => (
 	<div>
 		<h1>Home Page</h1>
