@@ -86,10 +86,11 @@ POST /api/loan/[id]/review
 
 #### Body
 
-| Name   | Type   | Description       |
-| ------ | ------ | ----------------- |
-| id     | string | UUID v4           |
-| status | string | approved/rejected |
+| Name        | Type      | Description                    |
+| ----------- | --------- | ------------------------------ |
+| id          | string    | UUID v4                        |
+| status      | string    | approved/rejected              |
+| disbursedAt | timestamp | required if status is approved |
 
 #### Example request
 
@@ -99,6 +100,28 @@ curl --location --request POST 'http://localhost:3000/api/loan/659b8749-5100-43a
 --data-raw '{
     "status": "approved"
 }'
+```
+
+---
+
+### Disburse a loan
+
+Update the loan status to disbursed and storage loan data hash on blockchain
+
+```
+POST /api/loan/[id]/disburse
+```
+
+#### Body
+
+| Name | Type   | Description |
+| ---- | ------ | ----------- |
+| id   | string | UUID v4     |
+
+#### Example request
+
+```
+curl --location --request POST 'http://localhost:3000/api/loan/659b8749-5100-43ad-bf53-5ca263d2d357/disburse'
 ```
 
 ---
