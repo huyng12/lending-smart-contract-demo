@@ -1,7 +1,10 @@
 import { Page } from "../../components/page";
+import LoanForm from "../../components/page/LoanForm";
+
 const HomeBody = () => (
 	<div>
 		<h1>Home Page</h1>
+		<LoanForm />
 	</div>
 );
 

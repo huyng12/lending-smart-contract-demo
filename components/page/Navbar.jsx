@@ -23,7 +23,9 @@ export const Navbar = () => {
 					<Menu.Item key="setting:1">
 						<Link href="/lookup">Các khoản vay</Link>
 					</Menu.Item>
-					<Menu.Item key="/home">Tạo khoản vay</Menu.Item>
+					<Menu.Item key="setting:2">
+						<Link href="/">Tạo khoản vay</Link>
+					</Menu.Item>
 				</Menu.ItemGroup>
 			</SubMenu>
 		</Menu>
