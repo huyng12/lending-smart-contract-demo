@@ -10,13 +10,10 @@ import {
 
 async function handler(req, res) {
 	try {
-		const query = await handler.schema.validateAsync(req.query);
+		const { id } = await handler.schema.validateAsync(req.query);
 
 		// Validate loan application existence
-		const { data, error } = await db
-			.from("loans")
-			.select()
-			.eq("id", query.id);
+		const { data, error } = await db.from("loans").select().eq("id", id);
 		if (error)
 			return res.status(500).json({ error: "internal server error" });
 		if (data.length === 0)
@@ -24,16 +21,33 @@ async function handler(req, res) {
 				.status(404)
 				.json({ error: "loan application is not exist" });
 
+		// Only allow approved loan applications
 		const [loan] = data;
-		if (loan.status !== "disbursed")
+		if (loan.status !== "approved")
 			return res
 				.status(400)
-				.json({ error: "loan application is not disbursed" });
+				.json({ error: "loan application is not approved" });
 
-		const hash = getObjectHash(loan);
-		const [isExist] = await contract.functions.is_contains(hash);
+		// Update loan application status
+		const {
+			error: hasError,
+			data: [updatedLoanData],
+		} = await db
+			.from("loans")
+			.update({ status: "disbursed" })
+			.match({ id });
+		if (hasError)
+			return res.status(500).json({ error: "internal server error" });
 
-		return res.status(200).json({ isTampered: !isExist });
+		try {
+			const hash = getObjectHash(updatedLoanData);
+			await contract.functions.insert(hash);
+		} catch (error) {
+			console.error(error);
+			return res.status(500).json({ error: "internal server error" });
+		}
+
+		return res.status(200).json({ success: true });
 	} catch (err) {
 		return res.status(400).json({ error: err.message });
 	}
