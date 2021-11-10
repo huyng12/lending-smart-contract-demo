@@ -34,7 +34,10 @@ async function handler(req, res) {
 			data: [updatedLoanData],
 		} = await db
 			.from("loans")
-			.update({ status: "disbursed" })
+			.update({
+				status: "disbursed",
+				disbursed_at: new Date().toISOString(),
+			})
 			.match({ id });
 		if (hasError)
 			return res.status(500).json({ error: "internal server error" });

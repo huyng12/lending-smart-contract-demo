@@ -86,11 +86,10 @@ POST /api/loan/[id]/review
 
 #### Body
 
-| Name        | Type      | Description                    |
-| ----------- | --------- | ------------------------------ |
-| id          | string    | UUID v4                        |
-| status      | string    | approved/rejected              |
-| disbursedAt | timestamp | required if status is approved |
+| Name   | Type   | Description       |
+| ------ | ------ | ----------------- |
+| id     | string | UUID v4           |
+| status | string | approved/rejected |
 
 #### Example request
 
