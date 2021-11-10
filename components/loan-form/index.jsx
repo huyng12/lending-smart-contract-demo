@@ -13,6 +13,7 @@ export const LoanForm = ({ form, onFinish, loading }) => {
 	const onFinishProxy = (data) =>
 		onFinish({
 			...data,
+			phoneNumber: `+84${data.phoneNumber}`,
 			interestRate: interestRates[data.duration],
 		});
 
@@ -68,7 +69,8 @@ export const LoanForm = ({ form, onFinish, loading }) => {
 						]}
 					>
 						<Input
-							placeholder="Số điện thoại của bạn"
+							placeholder="xxxxxxxxx"
+							prefix={<span>+84</span>}
 							disabled={loading}
 						/>
 					</Form.Item>
