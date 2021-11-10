@@ -22,7 +22,6 @@ export const getServerSideProps = async (context) => {
 		const { data } = await getLoanById(id);
 		return { props: { loan: data } };
 	} catch (err) {
-		console.error(err);
 		return {
 			notFound: true,
 		};
