@@ -20,7 +20,6 @@ export const getServerSideProps = async (context) => {
 	const { id } = context.query;
 	try {
 		const { data } = await getLoanById(id);
-		console.log(data);
 		return { props: { loan: data } };
 	} catch (err) {
 		console.error(err);
