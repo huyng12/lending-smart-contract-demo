@@ -6,8 +6,7 @@ const { Option } = Select;
 const LoanForm = (props) => {
 	const onFinish = (loanData) => {
 		console.log("Success:", loanData);
-		// call API
-		const userGender = loanData.gender === "female" ? 0 : 1;
+		const userGender = loanData.gender === "female" ? 0 : 1; // convert gender data to type number
 		const dataToSave = {
 			...loanData,
 			gender: userGender,
@@ -19,6 +18,7 @@ const LoanForm = (props) => {
 			})
 			.catch((err) => {
 				console.log(err);
+				alert("Input Value Not Valid");
 			});
 	};
 
@@ -52,7 +52,7 @@ const LoanForm = (props) => {
 					},
 				]}
 			>
-				<Input />
+				<Input placeholder="Your Full Name"/>
 			</Form.Item>
 			<Form.Item
 				label="National ID"
@@ -60,11 +60,11 @@ const LoanForm = (props) => {
 				rules={[
 					{
 						required: true,
-						message: "Please input your national ID !",
+						message: "Please input your national ID!. ",
 					},
 				]}
 			>
-				<Input />
+				<Input placeholder="At leat 9 characters." />
 			</Form.Item>
 			<Form.Item
 				label="Phone Number"
@@ -72,11 +72,11 @@ const LoanForm = (props) => {
 				rules={[
 					{
 						required: true,
-						message: "Please input your phone number!",
+						message: "Please input your phone number!.",
 					},
 				]}
 			>
-				<Input />
+				<Input placeholder="Must be 12 characters (include +84)" />
 			</Form.Item>
 			<Form.Item
 				name="gender"
@@ -102,7 +102,7 @@ const LoanForm = (props) => {
 					},
 				]}
 			>
-				<Input type="number" />
+				<Input type="number" placeholder="Must be at least 100000đ" />
 			</Form.Item>
 			<Form.Item
 				label="Interest Rate"
@@ -114,7 +114,7 @@ const LoanForm = (props) => {
 					},
 				]}
 			>
-				<Input type="number" />
+				<Input type="number" placeholder="Must be less than 32" />
 			</Form.Item>
 			<Form.Item
 				label="Duration"
@@ -126,7 +126,7 @@ const LoanForm = (props) => {
 					},
 				]}
 			>
-				<Input type="number" />
+				<Input type="number" placeholder="Must be less than 32" />
 			</Form.Item>
 			<Form.Item
 				wrapperCol={{
