@@ -22,7 +22,7 @@ const createLoanHandler = async (req, res) => {
 	try {
 		const body = await createLoanHandler.schema.validateAsync(req.body);
 		const {
-			data: { id },
+			data: [{ id }],
 			error,
 		} = await db.from("loans").insert(snakeCaseObjectKeys(body));
 		if (error)

@@ -1,12 +1,16 @@
 import axios from "axios";
 
 const req = axios.create({
-	baseURL: process.env.API_URL,
+	baseURL: process.env.NEXT_PUBLIC_API_URL,
 	timeout: 15000,
 	headers: {
 		"Content-Type": "application/json",
 	},
 });
+
+export const createLoan = async (loan) => {
+	return req.post("/loan", loan).then((r) => r.data);
+};
 
 export const getAllLoans = async () => {
 	return req.get("/loan").then((r) => r.data);

@@ -1,4 +1,5 @@
 import NextHead from "next/head";
+import { Navbar } from "./navbar";
 
 const defaults = {
 	title: "Lending Smart Contract Demo",
@@ -20,6 +21,7 @@ export const Page = (props) => {
 	return (
 		<div>
 			<Head {...props} />
+			<Navbar />
 			{props.body}
 		</div>
 	);
