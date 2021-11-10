@@ -1,10 +1,28 @@
+import { useRouter } from "next/router";
+import { LoanForm } from "../../components/loan-form";
+import { useLoanForm } from "../../components/loan-form/state";
 import { Page } from "../../components/page";
 
-const HomeBody = () => (
-	<div>
-		<h1>Home Page</h1>
-	</div>
-);
+const s = {
+	container: { paddingTop: 30 },
+	heading: { textAlign: "center" },
+};
+
+const HomeBody = () => {
+	const router = useRouter();
+	const form = useLoanForm({ router });
+
+	return (
+		<div style={s.container}>
+			<h1 style={s.heading}>Vay nhanh - Duyệt vay siêu tốc</h1>
+			<LoanForm
+				form={form.instance}
+				onFinish={form.onFinish}
+				loading={form.loading}
+			/>
+		</div>
+	);
+};
 
 const HomePage = () => (
 	<Page

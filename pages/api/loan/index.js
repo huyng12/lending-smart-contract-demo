@@ -22,12 +22,11 @@ const createLoanHandler = async (req, res) => {
 	try {
 		const body = await createLoanHandler.schema.validateAsync(req.body);
 		const {
-			data: { id },
+			data: [{ id }],
 			error,
 		} = await db.from("loans").insert(snakeCaseObjectKeys(body));
 		if (error)
 			return res.status(500).json({ error: "internal server error" });
-		// TODO: Call Seth smart contract to insert loan data hash
 		return res.status(200).json({
 			success: true,
 			message: "Created loan successfully",

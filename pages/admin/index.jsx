@@ -1,18 +1,22 @@
 import { getAllLoans } from "../../apis";
 import { Page } from "../../components/page";
 
-const AdminBody = (props) => (
-	<div>
-		<h1>Admin Dashboard</h1>
+const AdminBody = (props) => {
+	
+	
+	return (
 		<div>
-			{props.loans.map((loan, index) => (
-				<p key={loan.id}>
-					Loan #{index}: {loan.name} - {loan.amount} ₫
-				</p>
-			))}
+			<h1>Admin Dashboard</h1>
+			<div>
+				{props.loans.map((loan, index) => (
+					<p key={loan.id}>
+						Loan #{index}: {loan.name} - {loan.amount} ₫
+					</p>
+				))}
+			</div>
 		</div>
-	</div>
-);
+	);
+};
 
 const AdminPage = (props) => (
 	<Page
