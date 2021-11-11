@@ -1,19 +1,12 @@
 import { getAllLoans } from "../../apis";
 import { Page } from "../../components/page";
+import AllLoansTable from "../../components/page/AllLoansTable";
 
 const AdminBody = (props) => {
-	
-	
 	return (
 		<div>
 			<h1>Admin Dashboard</h1>
-			<div>
-				{props.loans.map((loan, index) => (
-					<p key={loan.id}>
-						Loan #{index}: {loan.name} - {loan.amount} ₫
-					</p>
-				))}
-			</div>
+			<AllLoansTable  dataSource={props.loans} />
 		</div>
 	);
 };
@@ -28,6 +21,7 @@ const AdminPage = (props) => (
 
 export const getServerSideProps = async () => {
 	const { data } = await getAllLoans();
+	console.log(data);
 	return {
 		props: { loans: data },
 	};
