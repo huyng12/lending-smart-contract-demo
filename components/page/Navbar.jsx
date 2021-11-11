@@ -21,11 +21,11 @@ export const Navbar = () => {
 			<SubMenu key="SubMenu" icon={<DashOutlined />} title="Khác">
 				<Menu.ItemGroup title="Thông tin">
 					<Menu.Item key="setting:1">
-						<Link href="/lookup">Các khoản vay</Link>
+						<Link href="/admin">Các khoản vay</Link>
 					</Menu.Item>
-					{/* <Menu.Item key="setting:2">
-						<Link href="/">Tạo khoản vay</Link>
-					</Menu.Item> */}
+					<Menu.Item key="setting:2">
+						<Link href="/lookup">Tìm kiếm</Link>
+					</Menu.Item>
 				</Menu.ItemGroup>
 			</SubMenu>
 		</Menu>
