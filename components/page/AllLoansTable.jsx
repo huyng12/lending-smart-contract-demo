@@ -1,4 +1,5 @@
 import { Button, Table, Tag } from "antd";
+import PopUpButton from "../button/PopUpButton";
 
 const columns = [
 	{
@@ -46,15 +47,26 @@ const columns = [
 			console.log(record.status);
 			if (record.status === "pending") {
 				return (
-					<Button size="middle" type="primary" id={record.id}>
+					<PopUpButton
+						loanId={record.id}
+						title="Review"
+						type="primary"
+					>
 						Review
-					</Button>
+					</PopUpButton>
 				);
 			}
 			if (record.status === "approved") {
-				return <Button size="middle" type="dashed">Disburse</Button>;
+				return (
+					<PopUpButton
+						type="danger"
+						loanId={record.id}
+						title="Disburse"
+					>
+						Disburse
+					</PopUpButton>
+				);
 			}
-			return <Button size="middle" type="dashed">.......</Button>;
 		},
 	},
 ];
