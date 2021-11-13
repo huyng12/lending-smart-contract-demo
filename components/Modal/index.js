@@ -1,17 +1,27 @@
 import { Modal } from "antd";
-import React, {useState} from "react";
+import React from "react";
+import { disburseLoanById } from "../../apis/index";
 
 const OverlayModal = (props) => {
 	const handleOk = (e) => {
 		if (props.title === 'Review') {
-			props.onCloseModal();
-			return;
+			// accept loan
+			
+		} else {
+			disburseLoanById(props.loanData.id).then(response => {
+				console.log(response);
+			}).catch(err => {
+				console.log(err);
+			})
 		}
-		// disburse API
-
+		props.onCloseModal();
+		
 	};
 	
 	const handleCancel = (e) => {
+		if (props.title === 'Review') {
+			// reject loan
+		} 
 		props.onCloseModal();
 	};
 
@@ -23,7 +33,8 @@ const OverlayModal = (props) => {
 			onCancel={handleCancel}
 			okButtonProps={{ disabled: false }}
 			cancelButtonProps={{ disabled: false }}
-			okText={props.title === 'Review' ? 'OK' : 'Disburse'}
+			okText={props.title === 'Review' ? 'Accept' : 'Disburse'}
+			cancelText={props.title === 'Review' ? 'Reject' : 'Cancel'}
 		>
 			{/* <p>ID: {props.loanData.id}</p> */}
 			<p>Trạng thái: {props.loanData.status}</p>

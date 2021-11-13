@@ -30,3 +30,8 @@ export const verifyLoanById = async (id) => {
 	const endpoint = `/loan/${id}/verify`;
 	return req.post(endpoint).then((r) => r.data);
 };
+
+export const disburseLoanById = async (id) => {
+	const endpoint = `/loan/${ id }/disburse`;
+	return req.post(endpoint).then((r) => r.data);
+}
