@@ -1,5 +1,8 @@
 import NextHead from "next/head";
-import { Navbar } from "../navbar";
+import { useRouter } from "next/router";
+import { useRouteChanging } from "../../utils/router/state";
+import { PageSpinner } from "../page-spinner";
+import { Navbar } from "./navbar";
 
 const defaults = {
 	title: "Lending Smart Contract Demo",
@@ -18,11 +21,14 @@ const Head = ({ title, description }) => (
 );
 
 export const Page = (props) => {
+	const router = useRouter();
+	const route = useRouteChanging({ router });
 	return (
 		<div>
 			<Head {...props} />
 			<Navbar />
-			{props.body}
+			<PageSpinner spinning={route.changing} />
+			{!route.changing && <div>{props.body}</div>}
 		</div>
 	);
 };
