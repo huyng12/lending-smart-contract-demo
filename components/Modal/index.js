@@ -54,6 +54,7 @@ const OverlayModal = (props) => {
 			<p>Trạng thái: {props.loanData.status}</p>
 			<p>Tên: {props.loanData.name}</p>
 			<p>Giới tính: {props.loanData.gender === 1 ? "Nam" : "Nữ"}</p>
+			<p>Khoản tiền: {props.loanData.amount} đồng</p>
 			<p>Thời hạn: {props.loanData.duration} tháng</p>
 			<p>Lãi suất: {props.loanData.interestRate}%</p>
 		</Modal>

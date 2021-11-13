@@ -1,5 +1,6 @@
 import { Button, Table, Tag } from "antd";
 import PopUpButton from "../button/PopUpButton";
+import { useState } from "react";
 
 const columns = [
 	{
@@ -41,10 +42,15 @@ const columns = [
 		key: "phoneNumber",
 	},
 	{
+		title: "Ngày tạo",
+		dataIndex: "createdAt",
+		key: "createdAt",
+		render: (createdAt) => new Date(createdAt).toLocaleString(),
+	},
+	{
 		title: "Khác",
 		key: "action",
 		render: (text, record) => {
-			console.log(record.status);
 			if (record.status === "pending") {
 				return (
 					<PopUpButton
@@ -72,7 +78,14 @@ const columns = [
 ];
 
 const AllLoansTable = (props) => {
-	return <Table columns={columns} dataSource={props.dataSource} />;
+	const [loanData, setLoanData] = useState(props.dataSource)
+	return (
+		<Table
+			columns={columns}
+			dataSource={loanData}
+			pagination={{ pageSize: 5 }}
+		/>
+	);
 };
 
 export default AllLoansTable;
