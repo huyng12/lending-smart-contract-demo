@@ -1,8 +1,10 @@
 import { Page } from "../../components/page";
+import SearchBar from "../../components/SearchBar";
 
 const LookupBody = () => (
-	<div>
+	<div style={{textAlign: 'center'}}>
 		<h1>Lookup</h1>
+		<SearchBar />
 	</div>
 );
 
