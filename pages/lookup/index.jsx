@@ -3,7 +3,7 @@ import SearchBar from "../../components/SearchBar";
 
 const LookupBody = () => (
 	<div style={{textAlign: 'center'}}>
-		<h1>Lookup</h1>
+		<h1>Tìm kiếm khoản vay</h1>
 		<SearchBar />
 	</div>
 );

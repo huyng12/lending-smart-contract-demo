@@ -50,7 +50,7 @@ const OverlayModal = (props) => {
 			okText={props.title === "Review" ? "Approve" : "Disburse"}
 			cancelText={props.title === "Review" ? "Reject" : "Cancel"}
 		>
-			{/* <p>ID: {props.loanData.id}</p> */}
+			<p>ID: {props.loanData.id}</p>
 			<p>Trạng thái: {props.loanData.status}</p>
 			<p>Tên: {props.loanData.name}</p>
 			<p>Giới tính: {props.loanData.gender === 1 ? "Nam" : "Nữ"}</p>

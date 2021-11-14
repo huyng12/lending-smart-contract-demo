@@ -1,20 +1,20 @@
-import { AudioOutlined } from "@ant-design/icons";
-import { Input, Space } from "antd";
+import { Input, message, Space } from "antd";
+import Router from "next/router";
 import React from "react";
+import { getLoanById } from "../../apis";
 
 const { Search } = Input;
 
-const suffix = (
-	<AudioOutlined
-		style={{
-			fontSize: 16,
-			color: "#1890ff",
-		}}
-	/>
-);
-
 const SearchBar = (props) => {
-	const onSearch = (value) => console.log(value);
+	const onSearch = (loanId) => {
+		getLoanById(loanId)
+			.then((res) => {
+				Router.push(`/lookup/${loanId}`);
+			})
+			.catch((_) => {
+				void message.error("ID không hợp lệ");
+			});
+	};
 
 	return (
 		<Space direction="vertical">

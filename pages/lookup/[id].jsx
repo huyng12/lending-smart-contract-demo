@@ -1,10 +1,11 @@
 import { getLoanById } from "../../apis";
+import LoanInfo from "../../components/loan-form/LoanInfo";
 import { Page } from "../../components/page";
 
 const LoanInformationBody = (props) => (
-	<div>
-		<p>Name: {props.loan.name}</p>
-		<p>Amount: {props.loan.amount}</p>
+	<div style={{ textAlign: 'center' }}>
+		<h1>Thông tin khoản vay</h1>
+		<LoanInfo loanData={props.loan} />
 	</div>
 );
 
