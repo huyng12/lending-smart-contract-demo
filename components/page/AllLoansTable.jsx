@@ -1,7 +1,7 @@
 import { Table, Tag } from "antd";
-import { useState } from "react";
 import useSWR from "swr";
 import PopUpButton from "../button/PopUpButton";
+import Loading from "../Loading";
 
 const columns = [
 	{
@@ -86,7 +86,7 @@ const AllLoansTable = (props) => {
 		fetcher,
 		{ refreshInterval: 3000 }
 	);
-	 if (!loanData) return <div>loading...</div>;
+	 if (!loanData) return <Loading />;
 	return (
 		<Table
 			columns={columns}
