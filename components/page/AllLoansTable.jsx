@@ -1,6 +1,7 @@
-import { Button, Table, Tag } from "antd";
-import PopUpButton from "../button/PopUpButton";
+import { Table, Tag } from "antd";
 import { useState } from "react";
+import useSWR from "swr";
+import PopUpButton from "../button/PopUpButton";
 
 const columns = [
 	{
@@ -77,12 +78,19 @@ const columns = [
 	},
 ];
 
+const fetcher = (...args) => fetch(...args).then((response) => response.json());
+
 const AllLoansTable = (props) => {
-	const [loanData, setLoanData] = useState(props.dataSource)
+	const { data: loanData, error } = useSWR(
+		`${process.env.NEXT_PUBLIC_API_URL}/loan`,
+		fetcher,
+		{ refreshInterval: 3000 }
+	);
+	 if (!loanData) return <div>loading...</div>;
 	return (
 		<Table
 			columns={columns}
-			dataSource={loanData}
+			dataSource={loanData.data}
 			pagination={{ pageSize: 5 }}
 		/>
 	);
