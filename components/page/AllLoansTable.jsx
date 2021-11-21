@@ -86,7 +86,7 @@ const AllLoansTable = (props) => {
 		fetcher,
 		{ refreshInterval: 3000 }
 	);
-	 if (!loanData) return <Loading />;
+	if (!loanData) return <Loading />;
 	return (
 		<Table
 			columns={columns}

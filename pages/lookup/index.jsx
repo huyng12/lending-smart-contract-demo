@@ -2,7 +2,7 @@ import { Page } from "../../components/page";
 import SearchBar from "../../components/SearchBar";
 
 const LookupBody = () => (
-	<div style={{textAlign: 'center'}}>
+	<div style={{ textAlign: "center" }}>
 		<h1>Tìm kiếm khoản vay</h1>
 		<SearchBar />
 	</div>

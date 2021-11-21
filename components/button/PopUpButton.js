@@ -1,7 +1,7 @@
 import { Button } from "antd";
 import { useState, useEffect } from "react";
 import { getLoanById } from "../../apis";
-import OverlayModal from '../Modal'
+import OverlayModal from "../Modal";
 
 const PopUpButton = (props) => {
 	const [visible, setVisible] = useState(false);
@@ -24,15 +24,20 @@ const PopUpButton = (props) => {
 	};
 
 	const closeModal = () => {
-		setVisible(false)
-	}
+		setVisible(false);
+	};
 
 	return (
 		<div>
 			<Button type={props.type} size="middle" onClick={showModal}>
 				{props.title}
 			</Button>
-			<OverlayModal title={props.title} visible={visible} loanData={loanData} onCloseModal={closeModal} />
+			<OverlayModal
+				title={props.title}
+				visible={visible}
+				loanData={loanData}
+				onCloseModal={closeModal}
+			/>
 		</div>
 	);
 };

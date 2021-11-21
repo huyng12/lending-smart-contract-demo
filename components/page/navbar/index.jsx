@@ -7,7 +7,7 @@ import React, { useMemo } from "react";
 const PATH_TO_KEY = {
 	"/": "home",
 	"/lookup": "lookup",
-	'/admin': 'admin'
+	"/admin": "admin",
 };
 
 export const Navbar = () => {

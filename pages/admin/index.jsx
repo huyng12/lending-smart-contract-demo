@@ -11,7 +11,7 @@ const AdminBody = (props) => {
 	return (
 		<div style={style.container}>
 			<h1 style={style.heading}>Các khoản vay hiện tại</h1>
-			<AllLoansTable  dataSource={props.loans} />
+			<AllLoansTable dataSource={props.loans} />
 		</div>
 	);
 };
