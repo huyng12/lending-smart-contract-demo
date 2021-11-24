@@ -8,6 +8,10 @@ const req = axios.create({
 	},
 });
 
+export const fetcher = async (url) => {
+	return req.get(url).then((r) => r.data);
+};
+
 export const createLoan = async (loan) => {
 	return req.post("/loan", loan).then((r) => r.data);
 };

@@ -26,8 +26,8 @@ const HomeBody = () => {
 
 const HomePage = () => (
 	<Page
-		title="Home - Lending Smart Contract Demo"
-		description="Apply for a loan on Lending Smart Contract Demo"
+		title="Trang chủ - Lending Smart Contract Demo"
+		description="Đăng ký vay trực tuyến tại Lending Smart Contract Demo"
 		body={<HomeBody />}
 	/>
 );

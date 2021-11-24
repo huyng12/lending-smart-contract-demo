@@ -1,5 +1,5 @@
 import NextHead from "next/head";
-import { Navbar } from "./navbar";
+import { Navbar } from "../navbar";
 
 const defaults = {
 	title: "Lending Smart Contract Demo",
