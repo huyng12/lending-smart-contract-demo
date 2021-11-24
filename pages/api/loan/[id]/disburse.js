@@ -48,8 +48,7 @@ async function handler(req, res) {
 			const { hash: txId } = await contract.functions.insert(hash);
 			await db
 				.from("disburse_logs")
-				.insert(snakeCaseObjectKeys({ txId, loanId: id }))
-				.catch(() => {});
+				.insert(snakeCaseObjectKeys({ txId, loanId: id }));
 		} catch (error) {
 			console.error(error);
 			return res.status(500).json({ error: "internal server error" });
