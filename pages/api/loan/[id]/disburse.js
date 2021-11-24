@@ -44,7 +44,8 @@ async function handler(req, res) {
 
 		try {
 			const hash = getObjectHash(updatedLoanData);
-			await contract.functions.insert(hash);
+			const data = await contract.functions.insert(hash);
+			console.log(data);
 		} catch (error) {
 			console.error(error);
 			return res.status(500).json({ error: "internal server error" });
