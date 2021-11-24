@@ -23,7 +23,7 @@ const getAllLoansHandler = async (_, res) => {
 		duration,
 		disbursed_at,
 		created_at,
-		tx_id:disburse_logs(tx_id)
+		transactions:disburse_logs(tx_id)
 	`);
 	if (error) return res.status(500).json({ error: "internal server error" });
 	return res
