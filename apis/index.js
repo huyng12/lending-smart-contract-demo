@@ -8,6 +8,10 @@ const req = axios.create({
 	},
 });
 
+export const fetcher = async (url) => {
+	return req.get(url).then((r) => r.data);
+};
+
 export const createLoan = async (loan) => {
 	return req.post("/loan", loan).then((r) => r.data);
 };
@@ -28,5 +32,10 @@ export const reviewLoanById = async (id, { status }) => {
 
 export const verifyLoanById = async (id) => {
 	const endpoint = `/loan/${id}/verify`;
+	return req.post(endpoint).then((r) => r.data);
+};
+
+export const disburseLoanById = async (id) => {
+	const endpoint = `/loan/${id}/disburse`;
 	return req.post(endpoint).then((r) => r.data);
 };

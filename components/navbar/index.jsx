@@ -7,6 +7,7 @@ import React, { useMemo } from "react";
 const PATH_TO_KEY = {
 	"/": "home",
 	"/lookup": "lookup",
+	"/admin": "admin",
 };
 
 export const Navbar = () => {
@@ -21,10 +22,13 @@ export const Navbar = () => {
 			<Menu.Item key={PATH_TO_KEY["/"]} icon={<HomeOutlined />}>
 				<Link href="/">Trang chủ</Link>
 			</Menu.Item>
-			<Menu.SubMenu icon={<DashOutlined />} title="Khác">
+			<Menu.SubMenu icon={<DashOutlined />} title="Khác" key="other">
 				<Menu.ItemGroup title="Thông tin">
 					<Menu.Item key={PATH_TO_KEY["/lookup"]}>
 						<Link href="/lookup">Tìm kiếm khoản vay</Link>
+					</Menu.Item>
+					<Menu.Item key={PATH_TO_KEY["/admin"]}>
+						<Link href="/admin">Các khoản vay</Link>
 					</Menu.Item>
 				</Menu.ItemGroup>
 			</Menu.SubMenu>
