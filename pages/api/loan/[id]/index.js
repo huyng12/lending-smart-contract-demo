@@ -12,7 +12,22 @@ async function handler(req, res) {
 		const query = await handler.schema.validateAsync(req.query);
 		const { data, error } = await db
 			.from("loans")
-			.select()
+			.select(
+				`
+				id,
+				status,
+				name,
+				national_id,
+				phone_number,
+				gender,
+				amount,
+				interest_rate,
+				duration,
+				disbursed_at,
+				created_at,
+				transactions:disburse_logs(tx_id)
+				`
+			)
 			.eq("id", query.id);
 		if (error)
 			return res.status(500).json({ error: "internal server error" });

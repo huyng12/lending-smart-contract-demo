@@ -1,9 +1,11 @@
-import { Descriptions, Typography } from "antd";
+import { LinkOutlined } from "@ant-design/icons";
+import { Button, Descriptions, Typography } from "antd";
 import { formatMoney } from "../../utils/money-formatter";
 import { formatPhoneNumber } from "../../utils/phone-formatter";
 
 export const LoanInfo = (props) => {
 	const { loan, ...rest } = props;
+	const [transaction] = loan.transactions;
 	return (
 		<Descriptions column={1} labelStyle={{ fontWeight: "bold" }} {...rest}>
 			<Descriptions.Item label="ID">
@@ -33,6 +35,18 @@ export const LoanInfo = (props) => {
 			<Descriptions.Item label="Số tiền phải trả">
 				{formatMoney(loan.amount * loan.interestRate)}
 			</Descriptions.Item>
+			{typeof transaction !== "undefined" && (
+				<Descriptions.Item>
+					<Button
+						type="primary"
+						target="_blank"
+						icon={<LinkOutlined />}
+						href={`https://ropsten.etherscan.io/tx/${transaction.tx_id}`}
+					>
+						View on Etherscan
+					</Button>
+				</Descriptions.Item>
+			)}
 		</Descriptions>
 	);
 };

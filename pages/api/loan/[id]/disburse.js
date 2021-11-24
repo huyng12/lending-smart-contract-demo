@@ -7,6 +7,7 @@ import {
 	createMethodProtectMiddleware,
 	withMiddlewares,
 } from "../../../../utils/middleware";
+import { snakeCaseObjectKeys } from "../../../../utils/transform";
 
 async function handler(req, res) {
 	try {
@@ -44,7 +45,10 @@ async function handler(req, res) {
 
 		try {
 			const hash = getObjectHash(updatedLoanData);
-			await contract.functions.insert(hash);
+			const { hash: txId } = await contract.functions.insert(hash);
+			await db
+				.from("disburse_logs")
+				.insert(snakeCaseObjectKeys({ txId, loanId: id }));
 		} catch (error) {
 			console.error(error);
 			return res.status(500).json({ error: "internal server error" });
