@@ -11,7 +11,20 @@ import {
 } from "../../../utils/transform";
 
 const getAllLoansHandler = async (_, res) => {
-	const { data, error } = await db.from("loans").select();
+	const { data, error } = await db.from("loans").select(`
+		id,
+		status,
+		name,
+		national_id,
+		phone_number,
+		gender,
+		amount,
+		interest_rate,
+		duration,
+		disbursed_at,
+		created_at,
+		tx_id:disburse_logs(tx_id)
+	`);
 	if (error) return res.status(500).json({ error: "internal server error" });
 	return res
 		.status(200)
