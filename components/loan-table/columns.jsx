@@ -2,7 +2,7 @@ import { Tag, Typography } from "antd";
 import { formatPhoneNumber } from "../../utils/phone-formatter";
 import { LoanModalButton } from "../loan-modal-button";
 
-const getColor = (status) => {
+export const getColor = (status) => {
 	switch (status) {
 		case "pending":
 			return "orange";
